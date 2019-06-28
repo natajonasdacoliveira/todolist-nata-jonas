@@ -15,7 +15,15 @@
           Quasar App
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>
+          <q-btn
+            color=""
+            dense
+            round
+            aria-label="AddRapido">
+            <q-icon name="add"></q-icon>
+          </q-btn>
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -25,7 +33,7 @@
       content-class="bg-grey-2"
     >
       <q-list>
-        <q-item-label header>Essential Links</q-item-label>
+        <q-item-label header>TO-DO List</q-item-label>
         <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
           <q-item-section avatar>
             <q-icon name="school" />
