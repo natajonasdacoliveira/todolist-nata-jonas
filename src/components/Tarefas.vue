@@ -5,8 +5,9 @@
     <q-list class="full-width" bordered padding>
         
       <q-item-label class="text-center" header>Tarefas</q-item-label>
-
+      
         <q-item v-for="(tarefa, index) in tarefas" :key="index" >
+
             <q-item-section>
                 <q-item-label>{{tarefa.titulo_tarefa}}</q-item-label>
                 <q-item-label caption></q-item-label>   
@@ -42,13 +43,12 @@
 </style>
 
 <script>
-import getTarefas from '../services/getTarefas'
+ import { mapState } from 'vuex'
 
 export default {
   name: 'Tarefas.vue',
     data() {
         return {
-            tarefas: Array,
         };
 
     },
@@ -59,16 +59,14 @@ export default {
             console.log(status_tarefa, id_tarefa)
         }
     },
-    mounted() {
 
-        getTarefas.lista()
-        .then(res => {
-            this.tarefas = res.data
-        }).catch(err => {
-            console.log(err)
-        })
-
+    mounted () {
+        this.$store.dispatch('getTarefas')
     },
-
+   computed: {
+     ...mapState({
+       tarefas: state => state.tarefas
+     })
+   } 
 }
 </script>
