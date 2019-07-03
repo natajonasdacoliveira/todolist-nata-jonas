@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="glossy">
+    <q-header elevated class="glossy bg-brown-6">
       <q-toolbar>
         <q-btn
           flat
@@ -9,15 +9,16 @@
           @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
           icon="menu"
+          
         />
 
         <q-toolbar-title>
-          Quasar App
+          ToDoList
         </q-toolbar-title>
 
         <div class="mobile-only">
           <q-btn
-            color=""
+            class="bg-deep-purple-4 shadow-24"
             dense
             round
             aria-label="AddRapido">
@@ -35,7 +36,7 @@
       <q-list>
         <q-item-label header>TO-DO List</q-item-label>
 
-        <q-item @click="goToHome()" clickable tag="a" target="_blank">
+        <q-item to="/" exact clickable tag="a">
 
           <q-item-section avatar>
 
@@ -53,7 +54,7 @@
         </q-item>
 
 
-        <q-item @click="goToTarefas()" clickable tag="a" target="_blank">
+        <q-item to="/tarefas" exact clickable tag="a">
           <q-item-section avatar>
             <q-icon name="list"/>
           </q-item-section>
@@ -81,14 +82,6 @@ import tarefas from './services/getTarefas'
 
 export default {
   name: 'LayoutDefault',
-  methods: {
-    goToTarefas() {
-      this.$router.push('/tarefas')
-    },
-    goToHome() {
-      this.$router.push('/')
-    }
-  },
   components: {
     Home
   },
@@ -97,9 +90,13 @@ export default {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop
     }
-  }
+  },
 }
 </script>
 
 <style>
+  .green-gradient {
+background: rgb(11,55,18);
+background: linear-gradient(0deg, rgba(11,55,18,1) 0%, rgba(32,128,19,1) 50%, rgba(138,228,115,1) 54%);
+  }
 </style>

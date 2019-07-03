@@ -2,17 +2,26 @@
 
 <q-page class="flex">
 
-    <q-list bordered padding>
+    <q-list class="full-width" bordered padding>
+        
+      <q-item-label class="text-center" header>Tarefas</q-item-label>
 
-        <q-item v-for="(fruit, index) in fruits" :key="index" >
-
+        <q-item v-for="(tarefa, index) in tarefas" :key="index" >
             <q-item-section>
-                <q-item-label>Single line item</q-item-label>
-                <q-item-label caption>Secondary line text. Lorem ipsum dolor sit amet, consectetur adipiscit elit.</q-item-label>
+                <q-item-label>{{tarefa.titulo_tarefa}}</q-item-label>
+                <q-item-label caption></q-item-label>   
             </q-item-section>
 
             <q-item-section side center>
-                <q-icon name="close" color="red"/>
+
+                <template v-if="tarefa.status_tarefa">
+                    <q-checkbox class="flex-center" @input="finalizarTarefa(tarefa.status_tarefa, tarefa.id_tarefa)" v-model="tarefa.status_tarefa" color="green" />
+
+                </template>
+                <template v-else>
+                    <q-checkbox class="flex-center" @input="finalizarTarefa(tarefa.status_tarefa, tarefa.id_tarefa)" v-model="tarefa.status_tarefa" color="gray" />
+                </template>
+
             </q-item-section>
 
       </q-item>
@@ -27,18 +36,39 @@
 </template>
 
 <style>
+
+
+
 </style>
 
 <script>
+import getTarefas from '../services/getTarefas'
+
 export default {
   name: 'Tarefas.vue',
     data() {
         return {
-            fruits: ['apple', 'banana', 'orange']
+            tarefas: Array,
         };
+
     },
-  props: {
-      tarefas: Array,
-  }
+    props: {
+    },
+    methods: {
+        finalizarTarefa(status_tarefa, id_tarefa) {
+            console.log(status_tarefa, id_tarefa)
+        }
+    },
+    mounted() {
+
+        getTarefas.lista()
+        .then(res => {
+            this.tarefas = res.data
+        }).catch(err => {
+            console.log(err)
+        })
+
+    },
+
 }
 </script>

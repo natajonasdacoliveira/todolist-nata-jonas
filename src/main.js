@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import store from '../src/store/raiz'
 
 import './quasar'
 
@@ -21,7 +22,7 @@ const router = new VueRouter({
 })
 
 new Vue({
-
+  store: store,
   router,
   render: h => h(App),
 }).$mount('#app')
