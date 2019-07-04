@@ -1,6 +1,10 @@
 export default {
     listaTarefas: state => {
-        let lista = state.tarefas.slice()
-        return lista
-    }   
+        let listaTarefas = state.tarefas.slice()
+        return listaTarefas
+    },
+
+    tarefaSelecionada: state => {
+        return state.tarefaSelecionada;
+    }
 }

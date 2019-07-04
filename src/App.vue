@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout class="bg-grey-4" view="lHh Lpr lFf">
     <q-header elevated class="glossy bg-brown-6">
       <q-toolbar>
         <q-btn
@@ -16,13 +16,13 @@
           ToDoList
         </q-toolbar-title>
 
-        <div class="mobile-only">
+        <div>
           <q-btn
-            class="bg-deep-purple-4 shadow-24"
+            class="bg-brown-1 shadow-24"
             dense
             round
-            aria-label="AddRapido">
-            <q-icon name="add"></q-icon>
+            aria-label="Adicionar Tarefa">
+            <q-icon name="add" color="green"></q-icon>
           </q-btn>
         </div>
       </q-toolbar>
@@ -46,8 +46,7 @@
 
           <q-item-section>
 
-            <q-item-label>Home</q-item-label>
-            <q-item-label caption>Página Inicial</q-item-label>
+            <q-item-label>Início</q-item-label>
             
           </q-item-section>
 
@@ -95,8 +94,5 @@ export default {
 </script>
 
 <style>
-  .green-gradient {
-background: rgb(11,55,18);
-background: linear-gradient(0deg, rgba(11,55,18,1) 0%, rgba(32,128,19,1) 50%, rgba(138,228,115,1) 54%);
-  }
+
 </style>
