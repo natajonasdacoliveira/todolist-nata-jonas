@@ -2,6 +2,7 @@ import getTarefas from '../services/getTarefas'
 import updateTarefa from '../services/updateTarefa'
 import deleteTarefa from '../services/deleteTarefa'
 import createTarefa from '../services/createTarefa'
+import finalizarTarefa from '../services/finalizarTarefa';
 
 export default {
 
@@ -77,6 +78,14 @@ export default {
 
 
                 deleteTarefa.delete(tarefa, dispatch)
+
+
+        },
+
+        async finalizarTarefa({ dispatch }, id_tarefa) {
+
+
+                finalizarTarefa.finalizar(id_tarefa, dispatch)
 
 
         },

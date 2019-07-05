@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Notify } from 'quasar'
 
 export default {
 
@@ -15,10 +16,17 @@ export default {
 
                         dispatch('getTarefas', res.data)
 
+                        Notify.create({
+                                message: 'Tarefa atualizada com sucesso',
+                                timeout: 2000
+                        })
                 })
                 .catch(err => {
 
-                        console.log(err)
+                        Notify.create({
+                                message: 'Erro: ' + err.message,
+                                timeout: 7000
+                        })
 
                 })
         }
