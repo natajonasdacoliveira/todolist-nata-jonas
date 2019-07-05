@@ -1,6 +1,12 @@
 export default {
+
+
     tarefas: [],
+
+
     tarefa: [],
+
+
     tarefaSelecionada: {
         id_tarefa: null,
         titulo_tarefa: null,
@@ -14,5 +20,11 @@ export default {
             valid: null
         },
         importancia_tarefa: null,
-    }
+    },
+ 
+
+    indexExpandDrop: -1,
+
+    estadoDropdown: false
+
 }

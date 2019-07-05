@@ -14,7 +14,7 @@
                                                 dense
                                                 round
                                                 aria-label="Deletar Tarefa"
-                                                @click="alterar">
+                                                @click="deletar">
 
                                                 <q-icon name="delete" class="text-red"></q-icon>
 
@@ -45,38 +45,87 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+
+
+import { mapGetters, mapState } from 'vuex';
+
+import setDropdowndata from '../mixin'
+
 export default {
 
-    name: 'buttonFooter',
+        name: 'buttonFooter',
+        props: {
+            tarefasRef: {}
+        },
+        mixins: [setDropdowndata],
+        computed: {
 
-    data() {
-        return {
-            
-        }
-    },
+                ...mapState({
 
-    computed: {
-        ...mapGetters({
-            tarefaSelecionada: 'tarefaSelecionada'
-        })    
-    },
+                        tarefaSelecionada: 'tarefaSelecionada',
+                        indexExpandDrop: 'indexExpandDrop'
 
-    methods: {
+                })    
 
-        alterar(id_tarefa, titulo_tarefa, descricao_tarefa, importancia_tarefa) {
+        },
 
-            if(this.tarefaSelecionada != null) {
+        methods: {
 
-                console.log(this.tarefaSelecionada.titulo_tarefa)
+            confirm(mensagem, action) {
+
+                    this.$q.dialog({
+
+                            title: 'Confirme',
+                            message: mensagem,
+                            cancel: true,
+
+                    }).onOk(() => {
+
+                        // this.$store.dispatch('setDropdownActive', false)
+
+                            switch (action) {
+
+                                case 'alterar':
+                                    this.tarefasRef.expansionItem[this.indexExpandDrop].hide()
+
+                                    this.$store.dispatch('updateTarefa', this.tarefaSelecionada)
+
+                                    this.setDropdowndata(null, false, -1)
+                                    
+                                    break;
+
+                                case 'deletar':
+
+                                    this.tarefasRef.expansionItem[this.indexExpandDrop].hide()
+
+                                    this.$store.dispatch('deleteTarefa', this.tarefaSelecionada)
+
+                                    this.setDropdowndata(null, false, -1)
+                                break;
+
+                                default:
+
+                                    break;
+
+                            }
+                    }).onCancel(() => {
+                    }).onDismiss(() => {
+                    })
+            },
+            alterar() {
+
+
+                this.confirm('Deseja alterar a Tarefa?', 'alterar')
+
+
+            },
+            deletar() {
+
+                this.confirm('Deseja deletar a Tarefa?', 'deletar')
+
 
             }
 
         },
-        deletar(id_tarefa) {
-
-        }
-
-    },
 }
 </script>

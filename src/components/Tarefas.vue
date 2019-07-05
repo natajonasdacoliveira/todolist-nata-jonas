@@ -4,12 +4,11 @@
 
         <q-list class="full-width" bordered separator padding>
             
-                <q-item-label class="text-center text-bold text-black" header>Tarefas</q-item-label>
-        
+                <q-item-label class="text-center text-bold text-black" header>Tarefas</q-item-label>    
 
                 <q-item v-for="(tarefa, index) in tarefas" :key="index">
 
-                        <q-expansion-item @show="setDropdown(); setTarefaSelecionada(tarefa)" @hide="setDropdown();" class="full-width" switch-toggle-side group="listaTarefas">
+                        <q-expansion-item ref="expansionItem" @click="setDropdown(index, tarefa);" class="full-width" switch-toggle-side group="listaTarefas">
 
                                 <template v-slot:header>
 
@@ -58,9 +57,9 @@
         </q-list>
   
 
-        <template v-if="dropdownActive">
+        <template v-if="estadoDropdown">
 
-            <button-footer></button-footer>
+                <button-footer :tarefasRef="this.$refs"></button-footer>
 
         </template>
 
@@ -71,67 +70,100 @@
 
 <style>
 
-    .break-word {
-        word-wrap: break-word
-    }
+        .break-word {
+                word-wrap: break-word
+        }
 
 </style>
 
 <script>
 
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
+
 import buttonFooter from './buttonFooter'
 import dropdownCard from './dropdownCard'
+import setDropdowndata from '../mixin'
+
 
 export default {
 
-    components: {
-        buttonFooter,
-        dropdownCard
-    },
+        name: 'Tarefas',
 
-    data () {
-        return {
-            dropdownActive: false,
-        }
-    },
-
-    methods: {  
-        setDropdown() {
-
-            if(this.dropdownActive == false) {
-
-                this.dropdownActive = true
-
-            } else {
-
-                this.setTarefaSelecionada(null)
-
-                this.dropdownActive = false
-
+        data() {
+            return {
             }
+        },
+        components: {
+                buttonFooter,
+                dropdownCard
+        },
+        mixins: [setDropdowndata],
+
+        methods: {  
+
+                setDropdown(index, tarefa) {
+
+                        if(this.indexDropdownSelecionado == -1) {
+
+                            this.setDropdowndata(tarefa, true, index)
+                            
+
+                            this.$refs.expansionItem[index].show()
+
+                            return
+
+                        } else if(this.indexDropdownSelecionado == index) {
+
+                            this.setDropdowndata(null, false, -1)
+
+
+                            this.$refs.expansionItem[index].hide()
+
+                            return
+
+                        } else if(this.indexDropdownSelecionado != index) {
+
+                            this.setDropdowndata(null, false, -1)
+    
+                            this.setDropdown(index, tarefa)
+
+                            return
+
+                        } 
+
+                },
+
+                finalizarTarefa(status_tarefa, id_tarefa) {
+
+                },
 
         },
-        async setTarefaSelecionada(tarefa) {
+    
+        created() {
 
-            await this.$store.dispatch('setTarefaSelecionada', tarefa)
-        },
-
-        finalizarTarefa(status_tarefa, id_tarefa) {
+                this.$store.dispatch('getTarefas', false)
 
         },
 
-    },
- 
-    mounted () {
-        this.$store.dispatch('getTarefas')
-    },
-   computed: {
-     ...mapState({
-         tarefas: 'tarefas',
-         tarefaSelecionada: 'tarefaSelecionada'
-     }),
-     
-   } 
+        computed: {
+
+                ...mapState({
+
+                        tarefas: 'tarefas',
+                        tarefaSelecionada: 'tarefaSelecionada',
+                        estadoDropdown: 'estadoDropdown',
+                        indexDropdownSelecionado: 'indexExpandDrop'
+
+                }),
+                // ...mapActions({
+                //     setDropdownActive: 'setDropdownActive',
+                //     getTarefasList: 'getTarefas'
+                // })
+        },
+        destroyed() {
+
+                this.setDropdowndata(null, false, -1)
+
+        },
 }
 </script>

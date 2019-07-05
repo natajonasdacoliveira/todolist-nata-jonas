@@ -1,13 +1,21 @@
 import getTarefas from '../services/getTarefas'
+import updateTarefa from '../services/updateTarefa'
+import deleteTarefa from '../services/deleteTarefa';
+
 export default {
 
-    getTarefas({commit}) {
-        getTarefas.lista()
-        .then(res => {
+    async getTarefas({commit}, payload) {
+
+        if(payload == false) {
+
+            let res = await getTarefas.lista()
             commit('SET_TAREFAS', res.data)
-        }).catch(err => {
             return
-        })
+            
+        }
+
+        commit('SET_TAREFAS', payload)
+
     },
 
     async setTarefaSelecionada( { commit }, payload ) {
@@ -47,6 +55,30 @@ export default {
             importancia_tarefa: payload.importancia_tarefa,
         })
 
-    }
+    },
 
+    async updateTarefa( { dispatch }, payload ) {
+
+
+        updateTarefa.update(payload, dispatch)
+
+
+    },
+
+    async deleteTarefa( { dispatch }, payload ) {
+
+
+        deleteTarefa.delete(payload, dispatch)
+
+
+    },
+
+
+    setEstadoDropdown({commit}, estado) {
+        commit('SET_ESTADO_DROPDOWN', estado)
+    },
+
+    setIndexDropdown({commit}, index) {
+        commit('SET_INDEX_DROPDOWN', index)
+    }
 }
