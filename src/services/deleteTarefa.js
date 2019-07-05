@@ -1,17 +1,18 @@
 import axios from 'axios';
 
 export default {
-    delete: (dados, dispatch) => {
+        
+        delete: (dados, dispatch) => {
 
-        return axios.delete('http://localhost:9000/tarefa/' + dados.id_tarefa).then(res => {
+                return axios.delete('http://localhost:9000/tarefa/' + dados.id_tarefa).then(res => {
 
-            dispatch('getTarefas', res.data)
+                        dispatch('getTarefas', res.data)
 
-        }).catch(err => {
+                }).catch(err => {
 
-            console.log(err)
+                        console.log(err)
 
-        })
-    }
+                })
+        }
 
 }

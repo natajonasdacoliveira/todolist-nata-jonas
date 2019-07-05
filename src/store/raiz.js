@@ -9,8 +9,10 @@ import actions from './actions'
 import getters from './getters'
 
 export default new Vuex.Store({
-    state: state,
-    mutations: mutations,
-    actions: actions,
-    getters: getters   
+
+        state: state,
+        mutations: mutations,
+        actions: actions,
+        getters: getters   
+
 })

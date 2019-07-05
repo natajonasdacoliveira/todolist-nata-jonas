@@ -1,6 +1,7 @@
 <template>
 
         <div>
+
                 <q-footer class="bg-brown-6" elevated>
 
                         <q-toolbar>
@@ -14,18 +15,21 @@
                                                 dense
                                                 round
                                                 aria-label="Deletar Tarefa"
-                                                @click="deletar">
+                                                @click="deletar"
+                                            >
 
                                                 <q-icon name="delete" class="text-red"></q-icon>
 
                                             </q-btn>
+
 
                                             <q-btn
                                                 class="bg-brown-1 shadow-24"
                                                 dense
                                                 round
                                                 aria-label="Alterar Tarefa"
-                                                @click="alterar">
+                                                @click="alterar"
+                                            >
 
                                                 <q-icon name="done" color="green"></q-icon>
 
@@ -54,10 +58,15 @@ import setDropdowndata from '../mixin'
 export default {
 
         name: 'buttonFooter',
+
         props: {
-            tarefasRef: {}
+                tarefasRef: {}
         },
-        mixins: [setDropdowndata],
+
+        mixins: [
+                setDropdowndata
+        ],
+        
         computed: {
 
                 ...mapState({
@@ -71,7 +80,7 @@ export default {
 
         methods: {
 
-            confirm(mensagem, action) {
+                confirm(mensagem, action) {
 
                     this.$q.dialog({
 
@@ -81,47 +90,50 @@ export default {
 
                     }).onOk(() => {
 
-                        // this.$store.dispatch('setDropdownActive', false)
-
                             switch (action) {
 
-                                case 'alterar':
-                                    this.tarefasRef.expansionItem[this.indexExpandDrop].hide()
+                                    case 'alterar':
 
-                                    this.$store.dispatch('updateTarefa', this.tarefaSelecionada)
+                                            this.tarefasRef.expansionItem[this.indexExpandDrop].hide()
 
-                                    this.setDropdowndata(null, false, -1)
-                                    
+                                            this.$store.dispatch('updateTarefa', this.tarefaSelecionada)
+
+                                            this.setDropdowndata(null, false, -1)
+                                            
                                     break;
 
-                                case 'deletar':
+                                    case 'deletar':
 
-                                    this.tarefasRef.expansionItem[this.indexExpandDrop].hide()
+                                            this.tarefasRef.expansionItem[this.indexExpandDrop].hide()
 
-                                    this.$store.dispatch('deleteTarefa', this.tarefaSelecionada)
+                                            this.$store.dispatch('deleteTarefa', this.tarefaSelecionada)
 
-                                    this.setDropdowndata(null, false, -1)
-                                break;
-
-                                default:
+                                            this.setDropdowndata(null, false, -1)
 
                                     break;
+
+                                    default:
+
+                                            break;
 
                             }
-                    }).onCancel(() => {
-                    }).onDismiss(() => {
                     })
+                    // .onCancel(() => {
+                    // }).onDismiss(() => {
+                    // })
+                },
+
+                alterar() {
+
+
+                    this.confirm('Deseja alterar a Tarefa?', 'alterar')
+
+
             },
-            alterar() {
 
+                deletar() {
 
-                this.confirm('Deseja alterar a Tarefa?', 'alterar')
-
-
-            },
-            deletar() {
-
-                this.confirm('Deseja deletar a Tarefa?', 'deletar')
+                    this.confirm('Deseja deletar a Tarefa?', 'deletar')
 
 
             }

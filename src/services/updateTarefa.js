@@ -1,23 +1,26 @@
 import axios from 'axios';
 
 export default {
-    update: (dados, dispatch) => {
 
-        return axios.put('http://localhost:9000/tarefa/' + dados.id_tarefa, {
+        update: (dados, dispatch) => {
 
-            titulo_tarefa: dados.titulo_tarefa,
-            descricao_tarefa: dados.descricao_tarefa,
-            importancia_tarefa: dados.importancia_tarefa
+                return axios.put('http://localhost:9000/tarefa/' + dados.id_tarefa, {
 
-        }).then(res => {
+                        titulo_tarefa: dados.titulo_tarefa,
+                        descricao_tarefa: dados.descricao_tarefa,
+                        importancia_tarefa: dados.importancia_tarefa
 
-            dispatch('getTarefas', res.data)
+                })
+                .then(res => {
 
-        }).catch(err => {
+                        dispatch('getTarefas', res.data)
 
-            console.log(err)
+                })
+                .catch(err => {
 
-        })
-    }
+                        console.log(err)
+
+                })
+        }
 
 }

@@ -1,4 +1,5 @@
 export default {
+
     methods: {
         setDropdowndata(tarefa, estado, index) {
             this.$store.dispatch('setTarefaSelecionada', tarefa)
@@ -6,5 +7,6 @@ export default {
             this.$store.dispatch('setIndexDropdown', index)
         }
     },
+
 }
 

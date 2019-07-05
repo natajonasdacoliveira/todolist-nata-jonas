@@ -1,70 +1,69 @@
 <template>
 
-<q-page class="flex">
+        <q-page class="flex">
 
-        <q-list class="full-width" bordered separator padding>
-            
-                <q-item-label class="text-center text-bold text-black" header>Tarefas</q-item-label>    
+                <q-list class="full-width" bordered separator padding>
 
-                <q-item v-for="(tarefa, index) in tarefas" :key="index">
-
-                        <q-expansion-item ref="expansionItem" @click="setDropdown(index, tarefa);" class="full-width" switch-toggle-side group="listaTarefas">
-
-                                <template v-slot:header>
-
-                                    <q-item-section>
-
-                                            <q-item-label class="break-word">{{ tarefa.titulo_tarefa }}</q-item-label>
-
-                                    </q-item-section>
+                        <q-item-label class="text-center text-bold text-black" header>Tarefas</q-item-label>    
 
 
-                                    <q-item-section side>
+                        <q-item v-for="(tarefa, index) in tarefas" :key="index">
 
-                                            <template v-if="tarefa.status_tarefa">
+                                <q-expansion-item ref="expansionItem" @click="setDropdown(index, tarefa);" class="full-width" switch-toggle-side group="listaTarefas">
 
-                                                    <q-checkbox class="flex-center" @input="finalizarTarefa(tarefa.status_tarefa, tarefa.id_tarefa)" v-model="tarefa.status_tarefa" color="green" />
+                                        <template v-slot:header>
 
-                                            </template>
+                                                <q-item-section>
 
+                                                        <q-item-label class="break-word">{{ tarefa.titulo_tarefa }}</q-item-label>
 
-                                            <template v-else>
-
-                                                    <q-checkbox class="flex-center" @input="finalizarTarefa(tarefa.status_tarefa, tarefa.id_tarefa)" v-model="tarefa.status_tarefa" color="gray" />
-                                           
-                                            </template>
-
-                                    </q-item-section>
-
-                                </template>
-
-                                <template v-if="tarefaSelecionada.titulo_tarefa != null">
-
-                                        <div>
-
-                                                <dropdown-card></dropdown-card> 
-                                            
-                                        </div>
-
-                                </template>
-
-  
-
-                        </q-expansion-item>
-
-                </q-item>
-
-        </q-list>
-  
-
-        <template v-if="estadoDropdown">
-
-                <button-footer :tarefasRef="this.$refs"></button-footer>
-
-        </template>
+                                                </q-item-section>
 
 
-</q-page>
+                                                <q-item-section side>
+
+                                                        <template v-if="tarefa.status_tarefa">
+
+                                                                <q-checkbox class="flex-center" @input="finalizarTarefa(tarefa.status_tarefa, tarefa.id_tarefa)" v-model="tarefa.status_tarefa" color="green" />
+
+                                                        </template>
+
+
+                                                        <template v-else>
+
+                                                                <q-checkbox class="flex-center" @input="finalizarTarefa(tarefa.status_tarefa, tarefa.id_tarefa)" v-model="tarefa.status_tarefa" color="gray" />
+
+                                                        </template>
+
+                                                </q-item-section>
+
+                                        </template>
+
+
+                                        <template v-if="tarefaSelecionada.titulo_tarefa != null">
+
+                                                <div>
+
+                                                        <dropdown-card></dropdown-card> 
+
+                                                </div>
+
+                                        </template>
+
+                                </q-expansion-item>
+
+                        </q-item>
+
+                </q-list>
+
+
+                <template v-if="estadoDropdown">
+
+                        <button-footer :tarefasRef="this.$refs"></button-footer>
+
+                </template>
+
+        </q-page>
 
 </template>
 

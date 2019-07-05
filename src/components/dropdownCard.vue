@@ -7,7 +7,8 @@
 
                         <q-form class="q-gutter-md">
 
-                        <q-item-label class="text-center text-grey" >Altere e salve os valores para editar</q-item-label>    
+                                <q-item-label class="text-center text-grey" >Altere e salve os valores para editar</q-item-label>    
+
 
                                 <q-input
                                     v-model="tarefa.titulo_tarefa"
@@ -61,30 +62,44 @@
 import { mapState } from 'vuex';
 
 export default {
-    name: 'dropdownCard',
-    data() {
-        return {
-            options: [
-        {
-          label: 'Pouco',
-          value: 1,
-        },
-        {
-          label: 'Relevante',
-          value: 2,
-        },
-        {
-          label: 'Vital',
-          value: 3
-        }
-      ]
-        }
-    },
-    computed: {
-        ...mapState({
-            tarefa: 'tarefaSelecionada',
-        }),
 
-    }
+        name: 'dropdownCard',
+
+
+        data() {
+
+                return {
+
+                        options: [
+
+                                {
+                                        label: 'Pouco',
+                                        value: 1,
+                                },
+
+                                {
+                                        label: 'Relevante',
+                                        value: 2,
+                                },
+
+                                {
+                                        label: 'Vital',
+                                        value: 3
+                                }
+                                
+                        ]
+                }
+        },
+
+        computed: {
+
+                ...mapState({
+
+                        tarefa: 'tarefaSelecionada',
+                    
+                }),
+
+        }
+
 }
 </script>

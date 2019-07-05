@@ -1,30 +1,29 @@
 export default {
 
-
-    tarefas: [],
-
-
-    tarefa: [],
+        tarefas: [],
 
 
-    tarefaSelecionada: {
-        id_tarefa: null,
-        titulo_tarefa: null,
-        descricao_tarefa: null,
-        data_registro_tarefa: {
-            Time: null,
-            valid: null
+        tarefa: [],
+
+
+        tarefaSelecionada: {
+            id_tarefa: null,
+            titulo_tarefa: null,
+            descricao_tarefa: null,
+            data_registro_tarefa: {
+                Time: null,
+                valid: null
+            },
+            data_execucao_tarefa: {
+                Time: null,
+                valid: null
+            },
+            importancia_tarefa: null,
         },
-        data_execucao_tarefa: {
-            Time: null,
-            valid: null
-        },
-        importancia_tarefa: null,
-    },
- 
+    
 
-    indexExpandDrop: -1,
+        indexExpandDrop: -1,
 
-    estadoDropdown: false
+        estadoDropdown: false
 
 }

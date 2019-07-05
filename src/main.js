@@ -10,21 +10,26 @@ Vue.config.productionTip = false
 Vue.use( VueRouter )
 
 const router = new VueRouter({
-  mode: 'history',
-  routes: [
-    {
-      path: '/', component: () => import('./components/Home.vue')
-    },
-    {
-      path:'/tarefas', component: () => import('./components/Tarefas.vue')
-    }
-  ]
+
+    mode: 'history',
+
+    routes: [
+
+        {
+            path: '/', component: () => import('./components/Home.vue')
+        },
+        
+        {
+            path:'/tarefas', component: () => import('./components/Tarefas.vue')
+        }
+
+    ]
 })
 
 new Vue({
-  store: store,
-  router,
-  render: h => h(App),
+      store: store,
+      router,
+      render: h => h(App),
 }).$mount('#app')
 
 

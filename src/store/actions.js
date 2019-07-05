@@ -4,81 +4,92 @@ import deleteTarefa from '../services/deleteTarefa';
 
 export default {
 
-    async getTarefas({commit}, payload) {
+        async getTarefas( { commit }, tarefas) {
 
-        if(payload == false) {
+                if(tarefas == false) {
 
-            let res = await getTarefas.lista()
-            commit('SET_TAREFAS', res.data)
-            return
-            
-        }
+                        let resTarefas = await getTarefas.lista()
 
-        commit('SET_TAREFAS', payload)
+                        commit('SET_TAREFAS', resTarefas.data)
 
-    },
+                        return
+                    
+                }
 
-    async setTarefaSelecionada( { commit }, payload ) {
+                commit('SET_TAREFAS', tarefas)
 
-        if(payload == null) {
+        },
 
-            commit('SET_TAREFA_SELECIONADA', {
-                id_tarefa: null,
-                titulo_tarefa: null,
-                descricao_tarefa: null,
-                data_registro_tarefa: {
-                    Time: null,
-                    valid: null
-                },
-                data_execucao_tarefa: {
-                    Time: null,
-                    valid: null
-                },
-                importancia_tarefa: null,
-            })
-            return
+        async setTarefaSelecionada( { commit }, tarefa ) {
 
-        }
+                if(tarefa == null) {
+
+                        commit('SET_TAREFA_SELECIONADA', {
+
+                                id_tarefa: null,
+                                titulo_tarefa: null,
+                                descricao_tarefa: null,
+                                data_registro_tarefa: {
+                                    Time: null,
+                                    valid: null
+                                },
+                                data_execucao_tarefa: {
+                                    Time: null,
+                                    valid: null
+                                },
+                                importancia_tarefa: null,
+                            
+                        })
+                        
+                        return
+
+                }
         
-        commit('SET_TAREFA_SELECIONADA', {
-            id_tarefa: payload.id_tarefa,
-            titulo_tarefa: payload.titulo_tarefa,
-            descricao_tarefa: payload.descricao_tarefa,
-            data_registro_tarefa: {
-                Time: payload.data_registro_tarefa.Time,
-                valid: payload.data_registro_tarefa.valid
-            },
-            data_execucao_tarefa: {
-                Time: payload.data_execucao_tarefa.Time,
-                valid: payload.data_execucao_tarefa.valid
-            },
-            importancia_tarefa: payload.importancia_tarefa,
-        })
+                commit('SET_TAREFA_SELECIONADA', {
 
-    },
+                        id_tarefa: tarefa.id_tarefa,
+                        titulo_tarefa: tarefa.titulo_tarefa,
+                        descricao_tarefa: tarefa.descricao_tarefa,
+                        data_registro_tarefa: {
+                            Time: tarefa.data_registro_tarefa.Time,
+                            valid: tarefa.data_registro_tarefa.valid
+                        },
+                        data_execucao_tarefa: {
+                            Time: tarefa.data_execucao_tarefa.Time,
+                            valid: tarefa.data_execucao_tarefa.valid
+                        },
+                        importancia_tarefa: tarefa.importancia_tarefa,
+                        
+                })
 
-    async updateTarefa( { dispatch }, payload ) {
+        },
 
-
-        updateTarefa.update(payload, dispatch)
-
-
-    },
-
-    async deleteTarefa( { dispatch }, payload ) {
+        async updateTarefa( { dispatch }, tarefa ) {
 
 
-        deleteTarefa.delete(payload, dispatch)
+                updateTarefa.update(tarefa, dispatch)
 
 
-    },
+        },
+
+        async deleteTarefa( { dispatch }, tarefa ) {
 
 
-    setEstadoDropdown({commit}, estado) {
-        commit('SET_ESTADO_DROPDOWN', estado)
-    },
+                deleteTarefa.delete(tarefa, dispatch)
 
-    setIndexDropdown({commit}, index) {
-        commit('SET_INDEX_DROPDOWN', index)
-    }
+
+        },
+
+
+        setEstadoDropdown( { commit }, estado) {
+            
+                commit('SET_ESTADO_DROPDOWN', estado)
+            
+        },
+
+        setIndexDropdown( { commit }, index) {
+
+                commit('SET_INDEX_DROPDOWN', index)
+
+        }
 }
