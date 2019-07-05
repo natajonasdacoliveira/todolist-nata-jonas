@@ -88,14 +88,11 @@ export default {
 
         name: 'Tarefas',
 
-        data() {
-            return {
-            }
-        },
         components: {
                 buttonFooter,
                 dropdownCard
         },
+        
         mixins: [setDropdowndata],
 
         methods: {  

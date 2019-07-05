@@ -27,6 +27,7 @@
                     class="bg-brown-1 shadow-24"
                     dense
                     round
+                    to="/criarTarefa" exact clickable tag="a"
                     aria-label="Adicionar Tarefa"
                   >
 
@@ -81,6 +82,24 @@
                   <q-item-section>
 
                       <q-item-label>Lista de Tarefas</q-item-label>
+
+                  </q-item-section>
+
+              </q-item>
+
+
+              <q-item to="/criarTarefa" exact clickable tag="a">
+
+                  <q-item-section avatar>
+
+                      <q-icon name="add"/>
+
+                  </q-item-section>
+
+
+                  <q-item-section>
+
+                      <q-item-label>Crie uma Tarefa</q-item-label>
 
                   </q-item-section>
 

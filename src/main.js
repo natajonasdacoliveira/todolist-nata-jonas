@@ -7,7 +7,7 @@ import './quasar'
 
 Vue.config.productionTip = false
 
-Vue.use( VueRouter )
+Vue.use(VueRouter)
 
 const router = new VueRouter({
 
@@ -18,18 +18,22 @@ const router = new VueRouter({
         {
             path: '/', component: () => import('./components/Home.vue')
         },
-        
+
         {
-            path:'/tarefas', component: () => import('./components/Tarefas.vue')
+            path: '/tarefas', component: () => import('./components/Tarefas.vue')
+        },
+
+        {
+            path: '/criarTarefa', component: () => import('./components/registroTarefa.vue')
         }
 
     ]
 })
 
 new Vue({
-      store: store,
-      router,
-      render: h => h(App),
+    store: store,
+    router,
+    render: h => h(App),
 }).$mount('#app')
 
 
